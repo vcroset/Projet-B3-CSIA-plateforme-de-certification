@@ -1,27 +1,15 @@
 {
-  "name": "serveur",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "name": "Serveur",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vcroset/Projet-B3-CSIA-plateforme-de-certification.git"
-  },
-  "author": "Koray Nicolas Valentin",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/vcroset/Projet-B3-CSIA-plateforme-de-certification/issues"
-  },
-  "homepage": "https://github.com/vcroset/Projet-B3-CSIA-plateforme-de-certification#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "http-errors": "latest",
-    "morgan": "^1.10.0"
-  },
-  "devDependencies": {
-    "cookie-parser": "^1.4.5"
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
   }
 }
