@@ -2,9 +2,9 @@
   "name": "serveur",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/vcroset/Projet-B3-CSIA-plateforme-de-certification/issues"
   },
-  "homepage": "https://github.com/vcroset/Projet-B3-CSIA-plateforme-de-certification#readme"
+  "homepage": "https://github.com/vcroset/Projet-B3-CSIA-plateforme-de-certification#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-errors": "latest",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "cookie-parser": "^1.4.5"
+  }
 }
