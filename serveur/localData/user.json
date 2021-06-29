@@ -1,0 +1,19 @@
+[
+  {
+    "mail": "test@test.fr",
+    "password": "testtest",
+    "state": "coach"
+  },
+  {
+    "mail": "test2@myges.fr",
+    "password": "password",
+    "state": "coach"
+  },
+  {
+    "mail": "responsable@test.fr",
+    "password": "password",
+    "state": "responsable"
+  }
+]
+
+
