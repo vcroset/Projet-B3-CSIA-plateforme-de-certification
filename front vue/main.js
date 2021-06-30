@@ -3,7 +3,10 @@ let app = new Vue({
     data() {
         return {
             login: false,
-            formationId: 0
+            formationId: 0,
+            posteState: {
+
+            }
         }
     },
     methods: {

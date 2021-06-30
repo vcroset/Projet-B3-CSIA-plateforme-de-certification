@@ -12,34 +12,33 @@ Vue.component('projet-formulaire-inscription', {
     template: `
         <div class="container">
         <form class="form-horizontal" role="form">
-            <h2>Formulaire d'inscription</h2>
             <div class="form-group">
-                <label for="firstName" class="col-sm-3 control-label">Prénom</label>
-                <div class="col-sm-9">
+                <label for="firstName" class="col-sm-3 control-label">Prénom *</label>
+                <div class="col-sm-12">
                     <input type="text" id="firstName" placeholder="Prénom" class="form-control" autofocus>
                 </div>
             </div>
             <div class="form-group">
-                <label for="lastName" class="col-sm-3 control-label">Nom</label>
-                <div class="col-sm-9">
+                <label for="lastName" class="col-sm-3 control-label">Nom *</label>
+                <div class="col-sm-12">
                     <input type="text" id="lastName" placeholder="Nom" class="form-control" autofocus>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email" class="col-sm-3 control-label">Email* </label>
-                <div class="col-sm-9">
+                <div class="col-sm-12">
                     <input type="email" id="email" placeholder="Email" class="form-control" name= "email">
                 </div>
             </div>
             <div class="form-group">
-                <label for="phoneNumber" class="col-sm-3 control-label">Numéro de téléphone </label>
-                <div class="col-sm-9">
+                <label for="phoneNumber" class="col-sm-9 control-label">Numéro de téléphone </label>
+                <div class="col-sm-12">
                     <input type="phoneNumber" id="phoneNumber" placeholder="Numéro de téléphone" class="form-control">
                 </div>
             </div>
             <div class="form-group">
-                <label for="birthDate" class="col-sm-3 control-label">Date de naissance*</label>
-                <div class="col-sm-9">
+                <label for="birthDate" class="col-sm-6 control-label">Date de naissance *</label>
+                <div class="col-sm-12">
                     <input type="date" id="birthDate" class="form-control">
                 </div>
             </div>
@@ -70,11 +69,11 @@ Vue.component('projet-formulaire-inscription', {
        
             </div> <!-- /.form-group -->
             <div class="form-group">
-                <div class="col-sm-9 col-sm-offset-3">
-                    <span class="help-block">*Champs requis</span>
+                <div class="col-sm-12 col-sm-offset-3">
+                    <span class="help-block">* Champs requis</span>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">S'enregistrer</button>
+            <button type="submit" class="btn btn-success btn-sm btn-block">S'inscrire</button>
         </form> <!-- /form -->
     </div> <!-- ./container -->
     `
