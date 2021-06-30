@@ -45,7 +45,7 @@ Vue.component('projet-login', {
         <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
         <input type="password" class="form-control" v-model="password">
         </div>
-        <button class="btn btn-primary" @click="loginRequest()">Connexion</button>
+        <button class="btn text-white" style="background: #00529F" @click="loginRequest()">Connexion</button>
           </div>
 </div>
     </div>`
