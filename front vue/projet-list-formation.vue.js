@@ -50,7 +50,7 @@ Vue.component('projet-list-formation', {
                     <img :src=item.img class="img-fluid">
                     <h6 class="card-subtitle mb-2 text-muted">Jour 1: {{ item.date1 }} Jour 2: {{ item.date2 }} Jour 3: {{ item.date3 }}</h6>
                     <p class="card-text">{{item.description}}</p>
-                    <button class="btn btn-success btn-sm">Formations</button>
+                    <button class="btn btn-success btn-sm" @click="$emit('register', item.id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop">S'inscrire</button>
                   </div>
                 </div>
               </div>
