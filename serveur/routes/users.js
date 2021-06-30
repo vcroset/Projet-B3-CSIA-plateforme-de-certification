@@ -20,6 +20,10 @@ function validateLogin(req, res, state) {
     }
 }
 
+router.get("/login", function (req, res,  next) {
+    res.json("ok")
+})
+
 // POST /users/coach/login
 router.post('/coach/login', function (req, res, next) {
     validateLogin(req, res, "coach")
