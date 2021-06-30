@@ -27,6 +27,7 @@
     <template v-if="!login">
         <div class="container">
             <projet-login @loginok="login = true"></projet-login>
+            <button class="btn btn-sm btn-outline-success mt-1" @click="login = true; setPosteState(0, 0, 0)">Je suis candidat, j'aimerai m'inscrire sur une formation</button>
             <div class="text-center mt-5">
                 <img src="./img/index.png" class="img-fluid text-center">
             </div>
@@ -35,6 +36,43 @@
     </template>
     <!-- spa -->
     <template v-else>
+        <div class="mt-2" v-if="posteState.manager == 1">
+            <div class="container">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group me-2" role="group" aria-label="First group">
+                        <button type="button" class="btn btn-primary">Ajout d'une formation</button>
+                        <button type="button" class="btn btn-primary">Ajout d'une certification</button>
+                    </div>
+                    <div class="btn-group me-2" role="group" aria-label="Second group">
+                        <button type="button" class="btn btn-secondary">Liste d'entretien</button>
+                        <button type="button" class="btn btn-secondary">Inscrire un eleve</button>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Third group">
+                        <button type="button" class="btn btn-info">Liste d'appels</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-2" v-if="posteState.formateur == 1">
+            <div class="container">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group me-2" role="group" aria-label="First group">
+                        <button type="button" class="btn btn-primary">Faire l'appel</button>
+                        <button type="button" class="btn btn-primary">Voir le calendrier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-2" v-if="posteState.coatch == 1">
+            <div class="container">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group me-2" role="group" aria-label="First group">
+                        <button type="button" class="btn btn-primary">Liste d'eleves</button>
+                        <button type="button" class="btn btn-primary">Voir le calendrier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="mt-1">
             <h4 class="text-center">Certifications</h4>
             <projet-list-certification></projet-list-certification>
