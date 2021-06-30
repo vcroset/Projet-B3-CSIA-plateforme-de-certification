@@ -32,6 +32,18 @@ Vue.component('projet-formulaire-inscription', {
                 </div>
             </div>
             <div class="form-group">
+                <label for="phoneNumber" class="col-sm-3 control-label">Numéro de téléphone </label>
+                <div class="col-sm-9">
+                    <input type="phoneNumber" id="phoneNumber" placeholder="Numéro de téléphone" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="birthDate" class="col-sm-3 control-label">Date de naissance*</label>
+                <div class="col-sm-9">
+                    <input type="date" id="birthDate" class="form-control">
+                </div>
+            </div>
+            <!--<div class="form-group">
                 <label for="password" class="col-sm-3 control-label">Mot de passe*</label>
                 <div class="col-sm-9">
                     <input type="password" id="password" placeholder="Mot de passe" class="form-control">
@@ -42,31 +54,8 @@ Vue.component('projet-formulaire-inscription', {
                 <div class="col-sm-9">
                     <input type="password" id="password" placeholder="Mot de passe" class="form-control">
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="birthDate" class="col-sm-3 control-label">Date de naissance*</label>
-                <div class="col-sm-9">
-                    <input type="date" id="birthDate" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="phoneNumber" class="col-sm-3 control-label">Numéro de téléphone </label>
-                <div class="col-sm-9">
-                    <input type="phoneNumber" id="phoneNumber" placeholder="Numéro de téléphone" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                    <label for="Height" class="col-sm-3 control-label">Taille* </label>
-                <div class="col-sm-9">
-                    <input type="number" id="height" placeholder="En centimètre" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                    <label for="weight" class="col-sm-3 control-label">Poids* </label>
-                <div class="col-sm-9">
-                    <input type="number" id="weight" placeholder="En Kg" class="form-control">
-                </div>
-            </div>
+            </div>-->
+            
             <div class="form-group">
             <div class="maxl">
                 <label class="radio inline"> 
