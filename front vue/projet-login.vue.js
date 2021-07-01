@@ -1,33 +1,30 @@
 Vue.component('projet-login', {
     data: function () {
         return {
-            mail : '',
-            password : ''
+            mail: '',
+            password: ''
         }
     },
-    mounted: async function() {
+    mounted: async function () {
         console.log("start login component");
     },
     methods: {
         async loginRequest() {
-            if(this.mail && this.password) {
-                var user = {
-                    'mail': this.mail,
-                    'password': this.password,
-                };
-                await fetch('http://localhost:3000/users/login', {
-                  method: 'GET',
-                  headers: {
-                    'Access-Control-Allow-Origin': 'http://localhost:3000/',
-                  }
+            if (this.mail && this.password) {
+                await fetch('http://localhost:3000/users/login/' + this.mail + "/" + this.password, {
+                    method: 'GET',
                 }).then(res => {
-                    if(res.status === 200) {
-                        this.$emit('loginok')
+                    return res.json()
+                }).then(json => {
+                    if (!json || json.length == 0) {
+                        alert("Le mot de passe il est pas bon (alors qu'il est en claire dans la bdd :/)")
+                        return
                     }
+                    this.$emit('loginok', this.mail)
                 }).catch(err => {
                     console.log(err)
                 });
-            }            
+            }
         }
     },
     template: `

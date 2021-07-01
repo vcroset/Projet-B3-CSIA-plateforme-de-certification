@@ -26,7 +26,7 @@
     <!-- portail de connexion -->
     <template v-if="!login">
         <div class="container">
-            <projet-login @loginok="login = true"></projet-login>
+            <projet-login @loginok="getPerm"></projet-login>
             <button class="btn btn-sm btn-outline-success mt-1" @click="login = true; setPosteState(0, 0, 0)">Je suis candidat, j'aimerai m'inscrire sur une formation</button>
             <div class="text-center mt-5">
                 <img src="./img/index.png" class="img-fluid text-center">

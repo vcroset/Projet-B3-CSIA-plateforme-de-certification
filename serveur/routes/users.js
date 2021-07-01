@@ -1,37 +1,26 @@
 const express = require('express')
+const sql = require('mysql')
 const router = express.Router()
 
-const users = require('../localData/user')
-
-function validateLogin(req, res, state) {
-    if (!req.body || !req.body.mail || !req.body.password) {
-        return res.json("no")
-    }
-    let mail = req.body.mail
-    let password = req.body.password
-    let user = users.filter(e => e.mail == mail && e.state == state)
-    if (user) {
-        user = user[0]
-    }
-    if (user && user.password == password) {
-        res.json("ok")
-    } else {
-        res.json("no")
-    }
-}
-
-router.get("/login", function (req, res,  next) {
-    res.json("ok")
-})
-
-// POST /users/coach/login
-router.post('/coach/login', function (req, res, next) {
-    validateLogin(req, res, "coach")
+let con = sql.createConnection({
+    host: "127.0.0.1",
+    user: "root",
+    port: 8889,
+    password: "root",
+    database: "b3csia"
 });
 
-// POST /users/responsable/login
-router.post('/responsable/login', function (req, res, next) {
-    validateLogin(req, res, "responsable")
+let isLoged = function (mail, mdp) {
+    return "SELECT utilisateur.utilisateur_id as loged FROM utilisateur WHERE utilisateur.mail = '" + mail + "' and utilisateur.mdp = '" + mdp + "'"
+}
+
+router.get('/login/:mail/:password', function (req, res, next) {
+    let mail = req.params.mail
+    let password = req.params.password
+    con.query(isLoged(mail, password), function (err, result) {
+        if (err) throw err;
+        res.json(result)
+    });
 });
 
 

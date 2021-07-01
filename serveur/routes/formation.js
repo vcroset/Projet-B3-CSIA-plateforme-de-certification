@@ -38,7 +38,7 @@ let getIntervantFormation = function (formation_id) {
 }
 
 let getAllFormation = function () {
-    return "SELECT formation.titre, u.prenom as responsablePrenom, u.nom as responsableNom FROM formation  LEFT JOIN responsable r on r.responsable_id = formation.responsable_id LEFT JOIN utilisateur u on u.utilisateur_id = r.utilisateur_id"
+    return "SELECT formation.titre,formation.formation_id as formationId, u.prenom as responsablePrenom, u.mail as responsableMail, u.nom as responsableNom FROM formation  LEFT JOIN responsable r on r.responsable_id = formation.responsable_id LEFT JOIN utilisateur u on u.utilisateur_id = r.utilisateur_id"
 }
 
 let getCoachForStudentWhereFormation = function (formation_id) {
@@ -53,8 +53,12 @@ let getPresentStudentOnFormation = function (formation_id) {
     return "SELECT e.nom as eleveNom, e.prenom as elevePrenom, present_formation.present as present, af.date as dateFormation, ui.nom as intervenantNom, ui.prenom as intervenantPrenom, f.titre as formationTitre FROM present_formation JOIN animer_formation af ON af.animer_formation_id = present_formation.animer_formation_id LEFT JOIN eleve e ON e.eleve_id = present_formation.eleve_id LEFT JOIN intervenant i ON i.intervenant_id = af.intervenant_id LEFT JOIN utilisateur ui ON i.utilisateur_id = ui.utilisateur_id LEFT JOIN formation f ON f.formation_id = af.formation_id WHERE af.formation_id = " + formation_id
 }
 
+let getPerm = function (mail) {
+    return "SELECT c.coach_id as isCoach,r.responsable_id as isResponsable,i.intervenant_id as isIntervenant FROM utilisateur LEFT JOIN coach c ON c.utilisateur_id = utilisateur.utilisateur_id LEFT JOIN responsable r ON r.utilisateur_id = utilisateur.utilisateur_id LEFT JOIN intervenant i ON i.utilisateur_id = utilisateur.utilisateur_id WHERE utilisateur.mail = '" + mail + "'"
+}
+
 // formation/
-router.get('/', function (req,res,next) {
+router.get('/', function (req, res, next) {
     con.query(getAllFormation(), function (err, result) {
         if (err) throw err;
         res.json(result)
@@ -103,6 +107,17 @@ router.get('/:id/fichepresent', function (req, res, next) {
         res.json('ko')
     }
     con.query(getPresentStudentOnFormation(id), function (err, result) {
+        if (err) throw err;
+        res.json(result)
+    });
+})
+
+router.get('/user/:mail', function (req, res, next) {
+    let id = req.params.mail
+    if (!id) {
+        res.json('ko')
+    }
+    con.query(getPerm(id), function (err, result) {
         if (err) throw err;
         res.json(result)
     });
