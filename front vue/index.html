@@ -17,6 +17,7 @@
     <script src="./projet-list-certification.vue.js"></script>
     <script src="./projet-formulaire-inscription.js"></script>
     <script src="./projet-list-formation.vue.js"></script>
+    <script src="./projet-list-appel.vue.js"></script>
 
 </head>
 <body>
@@ -48,7 +49,10 @@
                         <button type="button" class="btn btn-secondary">Inscrire un eleve</button>
                     </div>
                     <div class="btn-group" role="group" aria-label="Third group">
-                        <button type="button" class="btn btn-info">Liste d'appels</button>
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdropListAppel">Liste d'appels</button>
+
+
+                        <!--staticBackdropListAppel-->
                     </div>
                 </div>
             </div>
@@ -90,11 +94,33 @@
                         </div>
                         <div class="modal-body">
                             <projet-formulaire-inscription></projet-formulaire-inscription>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
+        <div class="mt-4 mb-1">
+            <h4 class="text-center">Formations</h4>
+            <projet-list-appel @register="showRegisterForm"></projet-list-appel>
+            <div class="modal fade" id="staticBackdropListAppel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Liste d'appel</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <projet-list-appel></projet-list-appel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </template>
 
     <footer class="text-center text-lg-start text-muted mt-5">

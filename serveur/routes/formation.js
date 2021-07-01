@@ -7,6 +7,8 @@ let con = sql.createConnection({
     user: "root",
     port: 8889,
     password: "root",
+    //port: 3306,
+    //password: "",
     database: "b3csia"
 });
 
