@@ -16,7 +16,8 @@ let app = new Vue({
                 description: '',
                 more: '',
                 imgUri: ''
-            }
+            },
+            entretien: null
         }
     },
     methods: {
@@ -89,13 +90,33 @@ let app = new Vue({
             await fetch('http://localhost:3000/formation/v2/entretien', {
                 method: 'GET',
             }).then(res => {
-                console.log(res);
+                return res.json()
+            }).then(json => {
+                this.entretien = json
             }).catch(err => {
                 console.log(err)
             });
         },
         showRegisterForm(id) {
             this.formationId = id;
+        },
+        displayContact(mail) {
+            alert("Mail : " + mail)
+        },
+        validEleve(eleve) {
+            fetch("http://localhost:3000/formation/v2/valideleve/" + eleve.eleve_id + "/" + this.mail, {
+                method: 'GET',
+            }).then(res => {
+                return res.json()
+            }).then(json => {
+                alert("Entretien ok ")
+            }).catch(err => {
+                console.log(err)
+            });
+            this.entretien = null
+            this.$nextTick(() => {
+                this.getEntretien()
+            })
         }
     }
 })

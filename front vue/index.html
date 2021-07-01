@@ -24,6 +24,53 @@
 <div id="app">
     <!-- nav bar -->
     <projet-navbar></projet-navbar>
+
+
+
+
+    <!-- modal liste entretien -->
+
+
+    <div class="modal fade" id="listEntretien" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >Liste d'entretien</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <template v-if="entretien">
+                        <ul>
+                            <li v-for="personne in entretien" v-if="!personne.reponse || personne.reponse == 'non'">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <p>{{personne.prenom}}</p>
+                                    </div>
+                                    <div class="col-1">
+                                        <p>{{personne.nom}}</p>
+                                    </div>
+                                    <div class="col-3">
+
+                                    </div>
+                                    <div class="col-4">
+                                        <button class="btn btn-sm btn-success" @click="validEleve(personne)">Accepter</button>
+                                    </div>
+                                    <div class="col-2">
+                                        <button class="btn btn-sm btn-success" @click="displayContact(personne.mail)">Contact</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- fin modal liste entretien -->
+
+
     <!-- portail de connexion -->
     <template v-if="!login">
         <div class="container">
@@ -45,7 +92,7 @@
                         <button type="button" class="btn btn-primary">Ajout d'une certification</button>
                     </div>
                     <div class="btn-group me-2" role="group" aria-label="Second group">
-                        <button type="button" class="btn btn-secondary">Liste d'entretien</button>
+                        <button type="button" class="btn btn-secondary" @click="getEntretien()" data-bs-toggle="modal" data-bs-target="#listEntretien">Liste d'entretien</button>
                         <button type="button" class="btn btn-secondary">Inscrire un eleve</button>
                     </div>
                     <div class="btn-group" role="group" aria-label="Third group">

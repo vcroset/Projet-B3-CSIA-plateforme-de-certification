@@ -193,15 +193,26 @@ router.get('/v2/inscription/:nom/:prenom/:mail/:date', function (req, res, next)
     let mail = req.params.mail
     let date = req.params.date
 
-    con.query('INSERT INTO `eleve` (`nom`, `prenom`, `mail`, `date_de_naissance`) VALUES ("'+ nom +'","'+ prenom +'","'+ mail +'","'+ date +'")', function (err, result) {
+    con.query('INSERT INTO `eleve` (`nom`, `prenom`, `mail`, `date_de_naissance`) VALUES ("' + nom + '","' + prenom + '","' + mail + '","' + date + '")', function (err, result) {
         if (err) throw err;
         res.json(result)
     });
 })
 router.get('/v2/entretien', function (req, res, next) {
-    con.query('SELECT eleve.nom, eleve.prenom, e.reponse FROM eleve LEFT JOIN entretien e on e.eleve_id = eleve.eleve_id', function (err, result) {
+    con.query('SELECT eleve.eleve_id, eleve.nom, eleve.prenom, eleve.mail, e.reponse FROM eleve LEFT JOIN entretien e on e.eleve_id = eleve.eleve_id', function (err, result) {
         if (err) throw err;
         res.json(result)
     });
 })
+
+router.get('/v2/valideleve/:eleveid/:mailresp', function (req, res, next) {
+    let eleveid = req.params.eleveid
+    let mailresp = req.params.mailresp
+
+    con.query("INSERT INTO `entretien` (`eleve_id`, `responsable_id`, `reponse`) VALUES ('" + eleveid + "', (SELECT responsable_id FROM responsable JOIN utilisateur u ON responsable.utilisateur_id = u.utilisateur_id WHERE u.mail = '" + mailresp + "'), 'oui')", function (err, result) {
+        if (err) throw err;
+        res.json(result)
+    });
+})
+
 module.exports = router;
