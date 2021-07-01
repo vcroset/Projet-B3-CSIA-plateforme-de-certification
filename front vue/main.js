@@ -53,11 +53,14 @@ let app = new Vue({
                 body: formBody
             }).then(res => {
                 if (res.status == 200) {
-                    this.updateFormation = false
-                    this.$nextTick(() => {
-                        this.updateFormation = true
-                    })
+                    this.reloadFormation()
                 }
+            })
+        },
+        reloadFormation() {
+            this.updateFormation = false
+            this.$nextTick(() => {
+                this.updateFormation = true
             })
         },
         async getPerm(mail) {

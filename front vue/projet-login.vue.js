@@ -1,8 +1,8 @@
 Vue.component('projet-login', {
     data: function () {
         return {
-            mail: '',
-            password: ''
+            mail: 'valentin.croset@gmail.com',
+            password: 'test'
         }
     },
     mounted: async function () {

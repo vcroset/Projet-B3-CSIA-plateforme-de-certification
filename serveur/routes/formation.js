@@ -134,9 +134,34 @@ router.get('/user/:mail', function (req, res, next) {
  */
 
 router.get('/v2/', function (req, res, next) {
-    con.query('SELECT * FROM formation', function (err, result) {
+    con.query('SELECT * FROM formation where formation.supprime = 0', function (err, result) {
         if (err) throw err;
         res.json(result)
+    });
+})
+
+router.get('/v2/prof', function (req, res, next) {
+    con.query('SELECT intervenant.intervenant_id, u.nom, u.prenom, af.date_intervention AS dateOccupe FROM intervenant JOIN utilisateur u ON u.utilisateur_id = intervenant.utilisateur_id LEFT JOIN animer_formation af ON af.intervenant_id = intervenant.intervenant_id ', function (err, result) {
+        if (err) throw err;
+        res.json(result)
+    });
+})
+
+router.get('/v2/:id/remove', function (req, res, next) {
+    con.query('UPDATE `formation` SET `supprime`=1 WHERE formation.formation_id = ' + req.params.id, function (err, result) {
+        if (err) throw err;
+        res.json("ok")
+    });
+})
+
+router.get('/v2/addDate/:idformation/:mailresponsable/:idintervenant/:date', function (req, res, next) {
+    let idFormation = req.params.idformation
+    let mailResponsable = req.params.mailresponsable
+    let idIntervenant = req.params.idintervenant
+    let date = req.params.date
+    con.query("INSERT INTO `animer_formation`(`responsable_id`, `intervenant_id`, `formation_id`, `date_intervention`) VALUES ((SELECT responsable_id FROM responsable JOIN utilisateur u ON responsable.utilisateur_id = u.utilisateur_id WHERE u.mail = '" + mailResponsable + "')," + idIntervenant + "," + idFormation + ",'" + date + "')", function (err, result) {
+        if (err) throw err;
+        res.json("ok")
     });
 })
 
@@ -152,8 +177,8 @@ router.post('/v2/', function (req, res) {
     let desc = req.body.description
     let descm = req.body.descriptionMore
     let imguri = req.body.imageUri
-    let query = "INSERT INTO `formation`(`nom`, `description`, `descriptionMore`, `imageUri`) VALUES ('" + nom
-        + "','" + desc + "', '" + descm + "','" + imguri + "')"
+    let query = "INSERT INTO `formation`(`nom`, `description`, `descriptionMore`, `imageUri`, `supprime`) VALUES ('" + nom
+        + "','" + desc + "', '" + descm + "','" + imguri + "', 0)"
     con.query(query, function (err, result) {
         if (err) {
             res.statusCode(404)
