@@ -125,4 +125,41 @@ router.get('/user/:mail', function (req, res, next) {
     });
 })
 
+
+/**
+ *
+ *  V2
+ *
+ *
+ */
+
+router.get('/v2/', function (req, res, next) {
+    con.query('SELECT * FROM formation', function (err, result) {
+        if (err) throw err;
+        res.json(result)
+    });
+})
+
+router.get('/v2/:id/dates', function (req, res, next) {
+    con.query('SELECT animer_formation.date_intervention as date from animer_formation where animer_formation.formation_id = ' + req.params.id, function (err, result) {
+        if (err) throw err;
+        res.json(result)
+    });
+})
+
+router.post('/v2/', function (req, res) {
+    let nom = req.body.nom
+    let desc = req.body.description
+    let descm = req.body.descriptionMore
+    let imguri = req.body.imageUri
+    let query = "INSERT INTO `formation`(`nom`, `description`, `descriptionMore`, `imageUri`) VALUES ('" + nom
+        + "','" + desc + "', '" + descm + "','" + imguri + "')"
+    con.query(query, function (err, result) {
+        if (err) {
+            res.statusCode(404)
+        }
+    });
+    res.json("ok")
+})
+
 module.exports = router;
