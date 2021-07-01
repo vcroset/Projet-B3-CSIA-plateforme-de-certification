@@ -198,5 +198,10 @@ router.get('/v2/inscription/:nom/:prenom/:mail/:date', function (req, res, next)
         res.json(result)
     });
 })
-
+router.get('/v2/entretien', function (req, res, next) {
+    con.query('SELECT eleve.nom, eleve.prenom, e.reponse FROM eleve LEFT JOIN entretien e on e.eleve_id = eleve.eleve_id', function (err, result) {
+        if (err) throw err;
+        res.json(result)
+    });
+})
 module.exports = router;

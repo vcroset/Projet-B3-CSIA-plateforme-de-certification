@@ -83,6 +83,16 @@ let app = new Vue({
             }).catch(err => {
                 console.log(err)
             });
+            
+        },
+        async getEntretien(){
+            await fetch('http://localhost:3000/formation/v2/entretien', {
+                method: 'GET',
+            }).then(res => {
+                console.log(res);
+            }).catch(err => {
+                console.log(err)
+            });
         },
         showRegisterForm(id) {
             this.formationId = id;
