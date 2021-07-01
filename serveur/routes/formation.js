@@ -187,4 +187,16 @@ router.post('/v2/', function (req, res) {
     res.json("ok")
 })
 
+router.get('/v2/inscription/:nom/:prenom/:mail/:date', function (req, res, next) {
+    let nom = req.params.nom
+    let prenom = req.params.prenom
+    let mail = req.params.mail
+    let date = req.params.date
+
+    con.query('INSERT INTO `eleve` (`nom`, `prenom`, `mail`, `date_de_naissance`) VALUES ("'+ nom +'","'+ prenom +'","'+ mail +'","'+ date +'")', function (err, result) {
+        if (err) throw err;
+        res.json(result)
+    });
+})
+
 module.exports = router;

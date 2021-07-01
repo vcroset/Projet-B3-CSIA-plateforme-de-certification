@@ -6,24 +6,29 @@ Vue.component('projet-formulaire-inscription', {
             mail : '',
             numero : '',
             date : '',
-            superieur : '',
-            inferieur : ''
+            genre:''
          
         }
     },
     mounted: async function() {
-
-
     },
     methods: {
         async saveFormulaire() {
-            console.log(this.prenom, this.nom, this.mail, this.mail, this.numero, this.date, this.superieur, this.inferieur)
+            console.log(this.prenom, this.nom, this.mail, this.numero, this.date, this.genre)
+            ////v2/inscription/:nom/:prenom/:mail/:date
+
+            fetch('http://localhost:3000/formation/v2/inscription/'+ this.nom +'/'+this.prenom+'/'+this.mail+'/'+this.date, {
+            method: 'GET',
+        }).then(res => {
+            return res.json()
+        }).then(json => {
+            alert("Vous êtes inscrit pour l'entretien")
+        })
             
         }
     },
     template: `
         <div class="container">
-        <form class="form-horizontal" role="form">
             <div class="form-group">
                 <label for="firstName" class="col-sm-3 control-label">Prénom *</label>
                 <div class="col-sm-12">
@@ -68,16 +73,10 @@ Vue.component('projet-formulaire-inscription', {
             </div>-->
             
             <div class="form-group">
-            <div class="maxl">
-                <label class="radio inline"> 
-                    <input type="radio"  v-model="superieur" name="gender" value="male" checked>
-                    <span> Homme </span> 
-                </label>
-                <label class="radio inline"> 
-                    <input type="radio" v-model="inferieur" name="gender" value="female">
-                    <span>Femme </span> 
-                </label>
-            </div>
+            <select class="form-select mt-2" v-model="genre">
+                <option selected value="homme">Homme</option>
+                <option value="femme">Femme</option>
+            </select>
        
             </div> <!-- /.form-group -->
             <div class="form-group">
@@ -85,8 +84,7 @@ Vue.component('projet-formulaire-inscription', {
                     <span class="help-block">* Champs requis</span>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success btn-sm btn-block">Postuler</button>
-        </form> <!-- /form -->
+            <button type="submit" class="btn btn-success btn-sm btn-block" @click="saveFormulaire">Postuler</button>
     </div> <!-- ./container -->
     `
 })
