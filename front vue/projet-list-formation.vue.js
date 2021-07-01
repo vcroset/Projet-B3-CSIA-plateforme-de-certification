@@ -53,7 +53,8 @@ Vue.component('projet-list-formation', {
                     <p class="card-text">{{item.description}}</p>
                     <p class="card-text">{{item.descriptionMore}}</p>
                     <button class="btn btn-success btn-sm" @click="$emit('register', item.id)" data-bs-toggle="modal" data-bs-target="#staticBackdrop">S'inscrire</button>
-                  </div>
+                    <button class="btn btn-danger btn-sm">Supprimer</button>
+                    </div>
                 </div>
          
               </div>
