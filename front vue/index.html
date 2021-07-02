@@ -89,14 +89,12 @@
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div class="btn-group me-2" role="group" aria-label="First group">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddFormation">Ajout d'une formation</button>
-                        <button type="button" class="btn btn-primary">Ajout d'une certification</button>
                     </div>
                     <div class="btn-group me-2" role="group" aria-label="Second group">
                         <button type="button" class="btn btn-secondary" @click="getEntretien()" data-bs-toggle="modal" data-bs-target="#listEntretien">Liste d'entretien</button>
-                        <button type="button" class="btn btn-secondary">Inscrire un eleve</button>
                     </div>
                     <div class="btn-group" role="group" aria-label="Third group">
-                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdropListAppel">Liste d'appels</button>
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdropListAppel" @click="getFicheAppel">Liste d'appels</button>
 
 
                         <!--staticBackdropListAppel-->
@@ -153,16 +151,41 @@
 
         <div class="mt-4 mb-1">
             <projet-list-appel @register="showRegisterForm"></projet-list-appel>
-            <div class="modal fade" id="staticBackdropListAppel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            <div class="modal fade " id="staticBackdropListAppel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog  modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Liste d'appel</h5>
+                            <h5 class="modal-title">Liste d'appel</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <projet-list-appel></projet-list-appel>
+                            <template v-if="appel">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Nom</th>
+                                        <th scope="col">Prenom</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Formation</th>
+                                        <th scope="col">Present</th>
+
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr v-for="personne in appel">
+                                        <th scope="row">{{personne.nomDeFamille}}</th>
+                                        <td>{{personne.prenom}}</td>
+                                        <td>{{new Date(personne.date_intervention).toLocaleDateString()}}</td>
+                                        <td>{{personne.nom}}</td>
+                                        <td>
+                                            <p :style="personne.present == 0 ? 'color: red' : 'color: black'">{{personne.present == 0 ? 'non' : 'oui'}}</p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </template>
                         </div>
                     </div>
                 </div>

@@ -17,7 +17,8 @@ let app = new Vue({
                 more: '',
                 imgUri: ''
             },
-            entretien: null
+            entretien: null,
+            appel: null
         }
     },
     methods: {
@@ -85,6 +86,17 @@ let app = new Vue({
                 console.log(err)
             });
             
+        },
+        async getFicheAppel() {
+            await fetch('http://localhost:3000/formation/v2/present', {
+                method: 'GET',
+            }).then(res => {
+                return res.json()
+            }).then(json => {
+                this.appel = json
+            }).catch(err => {
+                console.log(err)
+            });
         },
         async getEntretien(){
             await fetch('http://localhost:3000/formation/v2/entretien', {

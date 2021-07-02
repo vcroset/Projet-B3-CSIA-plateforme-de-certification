@@ -205,6 +205,13 @@ router.get('/v2/entretien', function (req, res, next) {
     });
 })
 
+router.get('/v2/present', function (req, res, next) {
+    con.query("SELECT participer_formation.present, e.nom as nomDeFamille, e.prenom, af.date_intervention, f.nom FROM participer_formation  JOIN animer_formation af ON af.animer_formation_id = participer_formation.animer_formation_id JOIN formation f ON f.formation_id = af.formation_id JOIN eleve e ON e.eleve_id = participer_formation.eleve_id",function (err, result) {
+        if (err) throw err;
+        res.json(result)
+    })
+})
+
 router.get('/v2/valideleve/:eleveid/:mailresp', function (req, res, next) {
     let eleveid = req.params.eleveid
     let mailresp = req.params.mailresp
